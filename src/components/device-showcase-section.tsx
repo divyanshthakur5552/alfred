@@ -2,7 +2,7 @@
 
 import { Safari } from "@/components/ui/safari"
 import { Iphone } from "@/components/ui/iphone"
-import { MobileChatInterface } from "@/components/mobile-chat-interface"
+import { JarvisMobileInterface } from "@/components/jarvis-mobile-interface"
 import AlfredDemoPortal from "@/components/AlfredDemoPortal"
 
 export function DeviceShowcaseSection() {
@@ -29,7 +29,7 @@ export function DeviceShowcaseSection() {
                     borderRadius: '12.88% / 6.61%'
                   }}
                 >
-                  <MobileChatInterface />
+                  <JarvisMobileInterface />
                 </div>
               </div>
             </div>

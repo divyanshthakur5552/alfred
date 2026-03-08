@@ -192,7 +192,7 @@ export function ShinyButton({ children, onClick, className = "", icon }: ShinyBu
           }
         }
       `}</style>
-      <button className={`shiny-cta ${className}`} onClick={onClick}>
+      <button className={`shiny-cta ${className}`} onClick={onClick} suppressHydrationWarning={true}>
         <span>
           {icon}
           {children}

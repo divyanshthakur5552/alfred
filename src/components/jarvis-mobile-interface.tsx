@@ -21,24 +21,16 @@ interface PendingPermission {
   details: string
 }
 
-export function MobileChatInterface() {
-  const [messages, setMessages] = useState<Message[]>([])
+export function JarvisMobileInterface() {
   const [inputText, setInputText] = useState('')
+  const [messages, setMessages] = useState<Message[]>([
+    { text: "System: Standing by for commands...", sender: "system", timestamp: Date.now() }
+  ])
   const [socket, setSocket] = useState<Socket | null>(null)
   const [isConnected, setIsConnected] = useState(true) // Start as connected like JarvisDemoPortal
   const [showDesktop, setShowDesktop] = useState(false)
-  const [isClient, setIsClient] = useState(false)
   const [pendingPermission, setPendingPermission] = useState<PendingPermission | null>(null)
   const chatContainerRef = useRef<HTMLDivElement>(null)
-
-  // Initialize messages
-  useEffect(() => {
-    setMessages([{
-      text: "System: Standing by for commands...",
-      sender: "system",
-      timestamp: Date.now()
-    }])
-  }, [])
 
   // Auto-scroll chat
   useEffect(() => {
@@ -47,7 +39,7 @@ export function MobileChatInterface() {
     }
   }, [messages])
 
-  // Establish Socket.IO connection - exact same as JarvisDemoPortal
+  // Establish Socket.IO connection - JARVIS only
   useEffect(() => {
     const newSocket = io(BACKEND_URL, {
       transports: ['websocket'],
@@ -103,7 +95,7 @@ export function MobileChatInterface() {
     return () => {
       newSocket.close()
     }
-  }, []) // Remove isClient dependency
+  }, [])
 
   const handleSendMessage = () => {
     if (!inputText.trim()) {
@@ -125,7 +117,7 @@ export function MobileChatInterface() {
       deviceId: DEVICE_ID,
       timestamp: Date.now()
     }, (response: any) => {
-      console.log('� Server acknowledged:', response)
+      console.log('📨 Server acknowledged:', response)
     })
 
     console.log('✅ Command emitted via socket')
@@ -162,8 +154,6 @@ export function MobileChatInterface() {
 
     setPendingPermission(null)
   }
-
-
 
   if (showDesktop) {
     return (
@@ -235,7 +225,7 @@ export function MobileChatInterface() {
             <span className="text-white text-sm font-bold">J</span>
           </div>
           <div>
-            <h3 className="text-white text-sm font-medium uppercase tracking-tighter">ALFRED <span className="text-zinc-500 font-light text-xs">Mobile</span></h3>
+            <h3 className="text-white text-sm font-medium uppercase tracking-tighter">JARVIS <span className="text-zinc-500 font-light text-xs">Mobile v4.0</span></h3>
             <div className="flex items-center gap-1">
               <Circle className={`w-2 h-2 fill-current ${isConnected ? 'text-emerald-500 animate-pulse' : 'text-red-500'}`} />
               <span className="text-[10px] text-zinc-400 uppercase tracking-widest">
@@ -246,6 +236,7 @@ export function MobileChatInterface() {
         </div>
         <button 
           onClick={() => setShowDesktop(true)}
+          suppressHydrationWarning={true}
           className="px-3 py-1 bg-emerald-600 text-white text-xs rounded uppercase tracking-wider hover:bg-emerald-500 transition-colors"
         >
           Live Feed
@@ -294,11 +285,13 @@ export function MobileChatInterface() {
             onChange={(e) => setInputText(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
             placeholder="EXECUTE SEQUENCE..."
+            suppressHydrationWarning={true}
             className="w-full bg-zinc-900 border border-zinc-800 rounded-lg py-3 pl-4 pr-12 text-sm focus:outline-none focus:border-emerald-500/50 transition-all placeholder:text-zinc-600 uppercase tracking-wider"
           />
           <button
             onClick={handleSendMessage}
             disabled={!inputText.trim()}
+            suppressHydrationWarning={true}
             className="absolute right-2 top-1/2 -translate-y-1/2 p-2 text-zinc-400 hover:text-emerald-400 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <Send size={18} />

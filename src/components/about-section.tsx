@@ -12,10 +12,10 @@ import Image from "next/image";
 
 export function AboutSection() {
   return (
-    <section id="about" className="relative py-20 bg-black overflow-hidden">
+    <section id="about" className="relative min-h-screen w-full py-20 bg-black overflow-hidden">
       {/* Background Ripple Effect */}
       <div className="absolute inset-0 w-full h-full">
-        <BackgroundRippleEffect rows={20} cols={30} cellSize={50} />
+        <BackgroundRippleEffect rows={20} cols={30} cellSize={70} />
       </div>
       
       {/* Gradient overlay - black via transparent to black */}
@@ -31,8 +31,7 @@ export function AboutSection() {
             Two-Model Pipeline • Cross-App Control •
           </ScrollVelocityRow>
         </ScrollVelocityContainer>
-        <div className="from-background pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r"></div>
-        <div className="from-background pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l"></div>
+     
       </div>
 
       {/* Text Reveal Animation */}

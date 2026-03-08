@@ -48,7 +48,7 @@ function Word({ children, progress, range }: WordProps) {
 
   return (
     <span className="relative mx-1 lg:mx-2.5">
-      <span className="absolute opacity-30">{children}</span>
+      <span className="absolute opacity-10 text-gray-600">{children}</span>
       <motion.span style={{ opacity }} className="text-white">
         {children}
       </motion.span>
