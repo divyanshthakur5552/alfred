@@ -55,7 +55,7 @@ export function MobileChatInterface() {
     })
 
     newSocket.on('connect', () => {
-      console.log('Connected to JARVIS Brain')
+      console.log('Connected to AlFRED Brain')
       setIsConnected(true)
       setMessages(prev => [...prev, {
         text: "System: Neural Link Established.",
@@ -65,7 +65,7 @@ export function MobileChatInterface() {
     })
 
     newSocket.on('disconnect', () => {
-      console.log('Disconnected from JARVIS Brain')
+      console.log('Disconnected from ALFRED Brain')
       setIsConnected(false)
       setMessages(prev => [...prev, {
         text: "System: Neural Link Severed.",
@@ -78,7 +78,7 @@ export function MobileChatInterface() {
       console.log('📨 Received jarvis_status:', data)
       if (data.message) {
         setMessages(prev => [...prev, {
-          text: `JARVIS: ${data.message}${data.progress ? ` (${data.progress}%)` : ''}`,
+          text: `ALFRED: ${data.message}${data.progress ? ` (${data.progress}%)` : ''}`,
           sender: "bot",
           timestamp: Date.now()
         }])
@@ -232,7 +232,7 @@ export function MobileChatInterface() {
       <div className="flex items-center justify-between px-4 py-3 bg-zinc-900/50 border-b border-zinc-800">
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 rounded-full bg-emerald-600 flex items-center justify-center">
-            <span className="text-white text-sm font-bold">J</span>
+            <span className="text-white text-sm font-bold">A</span>
           </div>
           <div>
             <h3 className="text-white text-sm font-medium uppercase tracking-tighter">ALFRED <span className="text-zinc-500 font-light text-xs">Mobile</span></h3>

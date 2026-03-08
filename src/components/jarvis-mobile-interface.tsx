@@ -39,7 +39,7 @@ export function JarvisMobileInterface() {
     }
   }, [messages])
 
-  // Establish Socket.IO connection - JARVIS only
+  // Establish Socket.IO connection - Alfred only
   useEffect(() => {
     const newSocket = io(BACKEND_URL, {
       transports: ['websocket'],
@@ -47,7 +47,7 @@ export function JarvisMobileInterface() {
     })
 
     newSocket.on('connect', () => {
-      console.log('Connected to JARVIS Brain')
+      console.log('Connected to Alfred Brain')
       setIsConnected(true)
       setMessages(prev => [...prev, {
         text: "System: Neural Link Established.",
@@ -57,7 +57,7 @@ export function JarvisMobileInterface() {
     })
 
     newSocket.on('disconnect', () => {
-      console.log('Disconnected from JARVIS Brain')
+      console.log('Disconnected from Alfred Brain')
       setIsConnected(false)
       setMessages(prev => [...prev, {
         text: "System: Neural Link Severed.",
@@ -70,7 +70,7 @@ export function JarvisMobileInterface() {
       console.log('📨 Received jarvis_status:', data)
       if (data.message) {
         setMessages(prev => [...prev, {
-          text: `JARVIS: ${data.message}${data.progress ? ` (${data.progress}%)` : ''}`,
+          text: `Alfred: ${data.message}${data.progress ? ` (${data.progress}%)` : ''}`,
           sender: "bot",
           timestamp: Date.now()
         }])
@@ -225,7 +225,7 @@ export function JarvisMobileInterface() {
             <span className="text-white text-sm font-bold">J</span>
           </div>
           <div>
-            <h3 className="text-white text-sm font-medium uppercase tracking-tighter">JARVIS <span className="text-zinc-500 font-light text-xs">Mobile v4.0</span></h3>
+            <h3 className="text-white text-sm font-medium uppercase tracking-tighter">Alfred <span className="text-zinc-500 font-light text-xs">Mobile v4.0</span></h3>
             <div className="flex items-center gap-1">
               <Circle className={`w-2 h-2 fill-current ${isConnected ? 'text-emerald-500 animate-pulse' : 'text-red-500'}`} />
               <span className="text-[10px] text-zinc-400 uppercase tracking-widest">
