@@ -86,7 +86,10 @@ export function MobileChatInterface() {
     })
 
     setSocket(newSocket)
-    return () => newSocket.close()
+    
+    return () => {
+      newSocket.close()
+    }
   }, [])
 
   const handleSendCommand = () => {
