@@ -40,8 +40,10 @@ export function MobileChatInterface() {
   // Socket connection
   useEffect(() => {
     const newSocket = io(BACKEND_URL, {
-      transports: ['websocket'],
+      transports: ['websocket', 'polling'],
       reconnectionAttempts: 5,
+      timeout: 10000,
+      forceNew: true,
     })
 
     newSocket.on('connect', () => {
@@ -57,6 +59,23 @@ export function MobileChatInterface() {
       setIsConnected(false)
       setMessages(prev => [...prev, {
         text: "System: Neural Link Severed.",
+        sender: "system",
+        timestamp: Date.now()
+      }])
+    })
+
+    newSocket.on('connect_error', (error) => {
+      setIsConnected(false)
+      setMessages(prev => [...prev, {
+        text: `System: Connection Error - ${error.message}`,
+        sender: "system",
+        timestamp: Date.now()
+      }])
+    })
+
+    newSocket.on('reconnect_failed', () => {
+      setMessages(prev => [...prev, {
+        text: "System: Reconnection Failed - Check Backend Server",
         sender: "system",
         timestamp: Date.now()
       }])
